@@ -1,0 +1,12 @@
+<mat-accordion *ngIf="usuarios.length > 0">
+  <mat-expansion-panel *ngFor="let usuario of usuarios">
+  <mat-expansion-panel-header>Usuario:{{usuario.usuario}}</mat-expansion-panel-header>
+<p>Senha:{{usuario.senha}}</p>
+<mat-action-row>
+  <button mat-button color="primary">EDITAR</button>
+  <button mat-button color="warn">REMOVER</button>
+</mat-action-row>
+</mat-expansion-panel>
+  </mat-accordion>
+  <p class="mat-body-1" style="text-align: center;" *ngIf="usuarios.length <= 0">
+    Nenhum cliente cadastrado</p>

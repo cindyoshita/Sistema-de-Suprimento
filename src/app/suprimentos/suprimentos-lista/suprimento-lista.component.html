@@ -1,0 +1,11 @@
+<mat-accordion *ngIf="suprimentos.length > 0">
+  <mat-expansion-panel *ngFor="let suprimento of suprimentos">
+  <mat-expansion-panel-header>Suprimento:{{suprimento.tipo}}</mat-expansion-panel-header>
+<mat-action-row>
+  <button mat-button color="primary">EDITAR</button>
+  <button mat-button color="warn">REMOVER</button>
+</mat-action-row>
+</mat-expansion-panel>
+  </mat-accordion>
+  <p class="mat-body-1" style="text-align: center;" *ngIf="suprimentos.length <= 0">
+    Nenhum Suprimento cadastrado</p>

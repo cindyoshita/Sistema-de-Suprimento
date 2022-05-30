@@ -1,0 +1,15 @@
+<h2> Inserção de Usuários</h2>
+<mat-card>
+<form (submit)="onAdicionarUsuario(usuarioForm)" #usuarioForm="ngForm">
+<mat-form-field>
+<input type="text" required minlength="4" matInput placeholder="Usuário" name="usuario" ngModel #usuario="ngModel"/>
+<mat-error r *ngIf="usuario.invalid">Digite um usuário válido</mat-error>
+</mat-form-field>
+<mat-form-field>
+<input type="password" required minlength="8"matInput placeholder="Senha"  name="senha" ngModel #senha="ngModel"/>
+<mat-error *ngIf="senha.invalid">Digite uma senha válida</mat-error>
+
+</mat-form-field>
+<button color="primary" mat-raised-button>Inserir Usuário</button>
+</form>
+</mat-card>

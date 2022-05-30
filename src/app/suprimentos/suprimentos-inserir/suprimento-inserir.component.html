@@ -1,0 +1,9 @@
+<h2> Inserção de Suprimentos</h2>
+<mat-card>
+<form (submit)="onAdicionarSuprimento(suprimentoForm)" #suprimentoForm="ngForm">
+<mat-form-field>
+<input type="text" required minlength="4" matInput placeholder="Suprimento" name="suprimento" ngModel #suprimento="ngModel"/>
+</mat-form-field>
+<button color="primary" mat-raised-button>Inserir Suprimento</button>
+</form>
+</mat-card>
