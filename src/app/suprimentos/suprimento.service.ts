@@ -21,7 +21,7 @@ getSuprimentos(): Suprimento[] {
   tipo: tipo,
   
   };
-  this.httpClient.post<{mensagem: string}> ('http://localhost:3000/api/suprimento',suprimentos).subscribe(
+  this.httpClient.put<{mensagem: string}> ('localhost:4000/suprimentos',suprimentos).subscribe(
  (dados) => {
  console.log(dados.mensagem);
  this.suprimento.push(suprimentos);

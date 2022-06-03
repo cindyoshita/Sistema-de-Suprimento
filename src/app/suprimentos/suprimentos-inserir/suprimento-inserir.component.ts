@@ -9,7 +9,7 @@ styleUrls: ['./suprimento-inserir.component.css'],
 
 })
 export class SuprimentoInserirComponent {
-  constructor(public suprimentoService: SuprimentoService) {}
+  constructor(public suprimentoService: SuprimentoService) { }
 
 onAdicionarSuprimento(form:NgForm) {
   console.log('Inserindo Suprimento...');
