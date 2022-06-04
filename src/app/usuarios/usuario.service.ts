@@ -37,7 +37,13 @@ adicionarUsuario(usuario: string, senha: string) {
     return this.listaUsuariosAtualizada.asObservable();
     }
 
-  verificarLogin(username: string, password: string){
-    this.httpClient.post<{mensagem: string}> ('localhost:4000/login',{username, password})
+  verificarLogin(userName: string, password: string){
+    this.httpClient.post<{mensagem: string}> ('localhost:4000/login',{userName, password})
   }
+
+  addUsuario(userName: string, password: string){
+    this.httpClient.post<{mensagem: string}> ('localhost:4000/usuario',{userName, password})
+  }
+
 }
+

@@ -18,12 +18,9 @@ let contadorSuprimento = 0;
 let usuarios = [];
 let contadorUsuario = 0;
 
-let senha = {};
-let contadorSenha = 0;
-let logged;
-
 
 app.get('/suprimentos', (req, res) => {
+  
   res.status(200).send("Suprimentos cadastrado")
   console.log(suprimentos)
 });
@@ -40,13 +37,13 @@ app.post('/suprimentos', (req, res) => {
     }
   }
 
-  suprimentos.push = {
-    nameSupply,
-    qttSupply
-  }
-  console.log(suprimentos);
-  res.status(201).send(suprimentos[contadorSuprimento]);
+  suprimentos.push({nameSupply,qttSupply})
+  console.log(suprimentos)
+  res.status(200).send(suprimentos[contadorSuprimento]);
 });
+
+
+
 
 app.get('/usuario', (req, res) => {
   res.send(usuarios);
@@ -54,29 +51,29 @@ app.get('/usuario', (req, res) => {
 
 app.post('/usuario', (req, res) => {
   contadorUsuario++;
-  const {username} = req.body;
+  const {userName} = req.body;
   const {password} = req.body;
 
 
   for(let i=0; i<usuarios.length; i++){
-    if (username === usuarios[i].username && password === usuarios[i].password){
+    if (userName === usuarios[i].userName && password === usuarios[i].password){
     
       res.status(401).send("Usuario ja cadastrado")
       
     }
       }
-    usuarios.push({username, password})
+    usuarios.push({userName, password})
     console.log(usuarios)
     res.status(201).send(usuarios[contadorUsuario]);
   
 });
 
 app.post('/login', (req, res) => {
-    const {username} = req.body;
+    const {userName} = req.body;
     const {password} = req.body;
     
     for(let i=0; i<usuarios.length; i++){
-        if (username === usuarios[i].username && password === usuarios[i].password){
+        if (userName === usuarios[i].userName && password === usuarios[i].password){
             res.status(200).send("Usuario logado")
         }
     }

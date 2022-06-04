@@ -16,7 +16,7 @@ export class SuprimentoService {
 getSuprimentos(): Suprimento[] {
  return [...this.suprimento];
  }
- adicionarSuprimento(tipo: string) {
+adicionarSuprimento(tipo: string) {
   const suprimentos: Suprimento = {
   tipo: tipo,
   
@@ -36,4 +36,9 @@ getSuprimentos(): Suprimento[] {
   getListaDeSuprimentosAtualizadaObservable() {
     return this.listaSuprimentosAtualizada.asObservable();
     }
+
+  addSuprimentos(nameSupply: string, qttSupply: string){
+    this.httpClient.post<{mensagem: string}> ('localhost:4000/suprimentos', {nameSupply, qttSupply})
+  }
+
 }
