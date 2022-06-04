@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const { Console } = require('console');
 app.use(bodyParser.json());
 
 
@@ -23,16 +24,27 @@ let logged;
 
 
 app.get('/suprimentos', (req, res) => {
-  res.send(suprimentos);
+  res.status(200).send("Suprimentos cadastrado")
+  console.log(suprimentos)
 });
 
 
 app.post('/suprimentos', (req, res) => {
   contadorSuprimento++;
-  const {suprimentos} = req.body;
-  suprimentos.push = {
-    suprimentos
+  const {nameSupply} = req.body;
+  const {qttSupply} = req.body;
+
+  for (let i=0; i<suprimentos.length; i++){
+    if (nameSupply === suprimentos[i].nameSupply){
+      res.status(401).send("Suprimento ja cadastrado.")
+    }
   }
+
+  suprimentos.push = {
+    nameSupply,
+    qttSupply
+  }
+  console.log(suprimentos);
   res.status(201).send(suprimentos[contadorSuprimento]);
 });
 
@@ -53,10 +65,9 @@ app.post('/usuario', (req, res) => {
       
     }
       }
-      usuarios.push({username,
-        password})
-      console.log(usuarios)
-      res.status(201).send(usuarios[contadorUsuario]);
+    usuarios.push({username, password})
+    console.log(usuarios)
+    res.status(201).send(usuarios[contadorUsuario]);
   
 });
 
