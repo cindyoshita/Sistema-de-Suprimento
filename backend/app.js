@@ -13,6 +13,7 @@ app.use((req, res, next) => {
 });
 
 let suprimentos = [];
+let suprimentosAux = [];
 let contadorSuprimento = 0;
 
 let usuarios = [];
@@ -25,19 +26,34 @@ app.get('/suprimentos', (req, res) => {
   console.log(suprimentos)
 });
 
-
 app.post('/suprimentos', (req, res) => {
   contadorSuprimento++;
   const {nameSupply} = req.body;
-  const {qttSupply} = req.body;
-
-  for (let i=0; i<suprimentos.length; i++){
-    if (nameSupply === suprimentos[i].nameSupply){
-      res.status(401).send("Suprimento ja cadastrado.")
+  let {qttSupply} = req.body;
+  const {typeSupply} = req.body;
+  let sum = 0;
+ 
+  if (suprimentos.length == 0){
+    suprimentos.push({nameSupply, qttSupply, typeSupply})
+    res.status(200).send(suprimentos);
+    console.log('entrei aqui')
+  } else {
+    for (let i=0; i<suprimentos.length; i++){
+      console.log('entrei no for')
+      if (nameSupply === suprimentos[i].nameSupply && typeSupply === suprimentos[i].typeSupply){
+        sum = qttSupply + suprimentos[i].qttSupply;
+        suprimentos[i].qttSupply = sum;
+        res.status(200).send(suprimentos);
+        console.log('entrei no if dentro do for')
+      }
+      else {
+        suprimentos.push({nameSupply, qttSupply, typeSupply})
+      }
     }
   }
 
-  suprimentos.push({nameSupply,qttSupply})
+ 
+
   console.log(suprimentos)
   res.status(200).send(suprimentos[contadorSuprimento]);
 });

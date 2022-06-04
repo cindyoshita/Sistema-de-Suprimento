@@ -37,9 +37,11 @@ adicionarSuprimento(tipo: string) {
     return this.listaSuprimentosAtualizada.asObservable();
     }
 
-  addSuprimentos(nameSupply: string, qttSupply: string){
+  addSuprimentos(nameSupply: string, qttSupply: number){
     this.httpClient.post<{mensagem: string}> ('localhost:4000/suprimentos', {nameSupply, qttSupply})
   }
 
-
+  getSuprimentosNovo(){
+    this.httpClient.get<{mensagem: string}> ('localhost:4000/suprimentos')
+  }
 }
