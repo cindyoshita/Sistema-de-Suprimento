@@ -11,7 +11,7 @@ app.use((req, res, next) => {
   next();
 });
 
-let suprimentos = {};
+let suprimentos = [];
 let contadorSuprimento = 0;
 
 let usuarios = [];
@@ -29,10 +29,9 @@ app.get('/suprimentos', (req, res) => {
 
 app.post('/suprimentos', (req, res) => {
   contadorSuprimento++;
-  const { texto} = req.body;
-  suprimentos[contadorSuprimento] = {
-    contadorSuprimento,
-    texto
+  const {suprimentos} = req.body;
+  suprimentos.push = {
+    suprimentos
   }
   res.status(201).send(suprimentos[contadorSuprimento]);
 });
@@ -45,10 +44,22 @@ app.post('/usuario', (req, res) => {
   contadorUsuario++;
   const {username} = req.body;
   const {password} = req.body;
+
   usuarios.push({username,
     password})
   console.log(usuarios)
   res.status(201).send(usuarios[contadorUsuario]);
+
+  // for(let i=0; i<usuarios.length; i++){
+  //   if (username === usuarios[i].username && password === usuarios[i].password){
+  //     usuarios.push({username,
+  //       password})
+  //     console.log(usuarios)
+  //     res.status(201).send(usuarios[contadorUsuario]);
+      
+  //   }
+  // }
+  // res.status(401).send("Usuario ja cadastrado")
 });
 
 app.post('/login', (req, res) => {
@@ -61,7 +72,6 @@ app.post('/login', (req, res) => {
         }
     }
     res.status(401).send("Falha ao logar")
-
 })
 
 app.listen(4000, () => {
