@@ -45,21 +45,19 @@ app.post('/usuario', (req, res) => {
   const {username} = req.body;
   const {password} = req.body;
 
-  usuarios.push({username,
-    password})
-  console.log(usuarios)
-  res.status(201).send(usuarios[contadorUsuario]);
 
-  // for(let i=0; i<usuarios.length; i++){
-  //   if (username === usuarios[i].username && password === usuarios[i].password){
-  //     usuarios.push({username,
-  //       password})
-  //     console.log(usuarios)
-  //     res.status(201).send(usuarios[contadorUsuario]);
+  for(let i=0; i<usuarios.length; i++){
+    if (username === usuarios[i].username && password === usuarios[i].password){
+    
+      res.status(401).send("Usuario ja cadastrado")
       
-  //   }
-  // }
-  // res.status(401).send("Usuario ja cadastrado")
+    }
+      }
+      usuarios.push({username,
+        password})
+      console.log(usuarios)
+      res.status(201).send(usuarios[contadorUsuario]);
+  
 });
 
 app.post('/login', (req, res) => {
