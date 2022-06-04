@@ -41,4 +41,5 @@ adicionarSuprimento(tipo: string) {
     this.httpClient.post<{mensagem: string}> ('localhost:4000/suprimentos', {nameSupply, qttSupply})
   }
 
+
 }

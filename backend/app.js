@@ -21,7 +21,7 @@ let contadorUsuario = 0;
 
 app.get('/suprimentos', (req, res) => {
   
-  res.status(200).send("Suprimentos cadastrado")
+  res.status(200).send(suprimentos)
   console.log(suprimentos)
 });
 
@@ -54,6 +54,7 @@ app.post('/usuario', (req, res) => {
   const {userName} = req.body;
   const {password} = req.body;
 
+  usuarios.push({userName, password})
 
   for(let i=0; i<usuarios.length; i++){
     if (userName === usuarios[i].userName && password === usuarios[i].password){
@@ -62,7 +63,7 @@ app.post('/usuario', (req, res) => {
       
     }
       }
-    usuarios.push({userName, password})
+    
     console.log(usuarios)
     res.status(201).send(usuarios[contadorUsuario]);
   
