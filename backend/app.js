@@ -1,8 +1,20 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const mongoose = require ('mongoose');
 const { Console } = require('console');
+const Suprimentos = require ('./models/suprimentos');
+
+mongoose.connect('mongodb+srv://SistemaSuprimentos:<password>@cluster0.a8v7sgo.mongodb.net/?retryWrites=true&w=majority')
+.then(() => {
+ console.log ("Conexão OK")
+}).catch(() => {
+ console.log("Conexão NOK")
+});
+
+
 app.use(bodyParser.json());
+
 
 
 app.use((req, res, next) => {
@@ -22,6 +34,14 @@ let contadorUsuario = 0;
 
 app.get('/suprimentos', (req, res) => {
   
+  Suprimentos.find().then(documents => {
+    res.status(200).json({
+    mensagem: "Tudo OK",
+    suprimentos: documents
+    });
+    })
+   
+
   res.status(200).send(suprimentos)
   console.log(suprimentos)
 });
@@ -52,7 +72,9 @@ app.post('/suprimentos', (req, res) => {
     }
   }
 
- 
+  suprimentos.save();
+  console.log (suprimentos);
+  res.status(201).json({mensagem: 'Suprimento inserido'}) 
 
   console.log(suprimentos)
   res.status(200).send(suprimentos[contadorSuprimento]);
