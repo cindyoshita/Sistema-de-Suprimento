@@ -3,9 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require ('mongoose');
 const { Console } = require('console');
-const Suprimentos = require ('./models/suprimentos');
+const Suprimento = require ('./models/suprimento');
 
-mongoose.connect('mongodb+srv://SistemaSuprimentos:<password>@cluster0.a8v7sgo.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://SistemaSuprimentos:SistemaSuprimentos@cluster0.a8v7sgo.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
  console.log ("Conexão OK")
 }).catch(() => {
@@ -53,31 +53,12 @@ app.post('/suprimentos', (req, res) => {
   const {typeSupply} = req.body;
   let sum = 0;
  
-  if (suprimentos.length == 0){
-    suprimentos.push({nameSupply, qttSupply, typeSupply})
-    res.status(200).send(suprimentos);
-    console.log('entrei aqui')
-  } else {
-    for (let i=0; i<suprimentos.length; i++){
-      console.log('entrei no for')
-      if (nameSupply === suprimentos[i].nameSupply && typeSupply === suprimentos[i].typeSupply){
-        sum = qttSupply + suprimentos[i].qttSupply;
-        suprimentos[i].qttSupply = sum;
-        res.status(200).send(suprimentos);
-        console.log('entrei no if dentro do for')
-      }
-      else {
-        suprimentos.push({nameSupply, qttSupply, typeSupply})
-      }
-    }
-  }
+  const s = new Suprimento ({nameSupply, qttSupply, typeSupply})
 
-  suprimentos.save();
-  console.log (suprimentos);
+  s.save();
+  console.log (s);
   res.status(201).json({mensagem: 'Suprimento inserido'}) 
 
-  console.log(suprimentos)
-  res.status(200).send(suprimentos[contadorSuprimento]);
 });
 
 

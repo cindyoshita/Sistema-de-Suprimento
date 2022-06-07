@@ -6,4 +6,4 @@ const suprimentoSchema = mongoose.Schema ({
     typeSupply: {type: String, required: true}
    });
 
-module.exports = mongoose.model('Suprimentos', suprimentoSchema);
+module.exports = mongoose.model('Suprimento', suprimentoSchema);
