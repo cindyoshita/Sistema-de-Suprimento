@@ -47,7 +47,6 @@ app.get('/suprimentos', (req, res) => {
 });
 
 app.post('/suprimentos', (req, res) => {
-  contadorSuprimento++;
   const {nameSupply} = req.body;
   let {qttSupply} = req.body;
   const {typeSupply} = req.body;
@@ -55,7 +54,31 @@ app.post('/suprimentos', (req, res) => {
  
   const s = new Suprimento ({nameSupply, qttSupply, typeSupply})
 
+  if (s.length == 0){
+    console.log("Entrei no primeiro if")
+    s.save();
+    s.push({nameSupply, qttSupply, typeSupply})
+    res.status(200).send(s);
+  }
+  else {
+    
+    for (let i=0; i<s.length; i++){
+      if(nameSupply === s[i].nameSupply && typeSupply === s[i].typeSupply){
+        sum = qttSupply + s[i].qttSupply;
+        s[i].qttSupply = sum;
+        console.log("Entrei no primeiro else")
+        s.save();
+        res.status(200).send(s);
+      }
+      else{
+        console.log("Entrei no segundo else")
+        s.push({nameSupply, qttSupply, typeSupply})
+      }
+    }
+  }
+
   s.save();
+  console.log("Sai de ambos os else e do if")
   console.log (s);
   res.status(201).json({mensagem: 'Suprimento inserido'}) 
 
