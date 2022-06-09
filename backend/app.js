@@ -33,14 +33,14 @@ let contadorUsuario = 0;
 
 
 app.get('/suprimentos', (req, res) => {
-  
+
   Suprimentos.find().then(documents => {
     res.status(200).json({
     mensagem: "Tudo OK",
     suprimentos: documents
     });
     })
-   
+
 
   res.status(200).send(suprimentos)
   console.log(suprimentos)
@@ -51,7 +51,7 @@ app.post('/suprimentos', (req, res) => {
   let {qttSupply} = req.body;
   const {typeSupply} = req.body;
   let sum = 0;
- 
+
   const s = new Suprimento ({nameSupply, qttSupply, typeSupply})
 
   if (s.length == 0){
@@ -61,7 +61,7 @@ app.post('/suprimentos', (req, res) => {
     res.status(200).send(s);
   }
   else {
-    
+
     for (let i=0; i<s.length; i++){
       if(nameSupply === s[i].nameSupply && typeSupply === s[i].typeSupply){
         sum = qttSupply + s[i].qttSupply;
@@ -77,10 +77,15 @@ app.post('/suprimentos', (req, res) => {
     }
   }
 
+  Suprimento.find({nameSupply: "Agua"}).then(doc => {
+    console.log(doc)
+  })
+  .catch(err => {
+    console.error(err)
+  })
   s.save();
   console.log("Sai de ambos os else e do if")
-  console.log (s);
-  res.status(201).json({mensagem: 'Suprimento inserido'}) 
+  res.status(201).json({mensagem: 'Suprimento inserido'})
 
 });
 
@@ -100,21 +105,21 @@ app.post('/usuario', (req, res) => {
 
   for(let i=0; i<usuarios.length; i++){
     if (userName === usuarios[i].userName && password === usuarios[i].password){
-    
+
       res.status(401).send("Usuario ja cadastrado")
-      
+
     }
       }
-    
+
     console.log(usuarios)
     res.status(201).send(usuarios[contadorUsuario]);
-  
+
 });
 
 app.post('/login', (req, res) => {
     const {userName} = req.body;
     const {password} = req.body;
-    
+
     for(let i=0; i<usuarios.length; i++){
         if (userName === usuarios[i].userName && password === usuarios[i].password){
             res.status(200).send("Usuario logado")
