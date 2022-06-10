@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const mongoose = require ('mongoose');
 const { Console } = require('console');
 const Suprimento = require ('./models/suprimento');
+const { db } = require('./models/suprimento');
+const suprimento = require('./models/suprimento');
 
 mongoose.connect('mongodb+srv://SistemaSuprimentos:SistemaSuprimentos@cluster0.a8v7sgo.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
@@ -16,7 +18,6 @@ mongoose.connect('mongodb+srv://SistemaSuprimentos:SistemaSuprimentos@cluster0.a
 app.use(bodyParser.json());
 
 
-
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', "*");
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type,Accept');
@@ -24,7 +25,6 @@ app.use((req, res, next) => {
   next();
 });
 
-let suprimentos = [];
 let suprimentosAux = [];
 let contadorSuprimento = 0;
 
@@ -43,7 +43,7 @@ app.get('/suprimentos', (req, res) => {
 
 
   res.status(200).send(suprimentos)
-  console.log(suprimentos)
+  console.log(documents)
 });
 
 app.post('/suprimentos', (req, res) => {
@@ -51,40 +51,43 @@ app.post('/suprimentos', (req, res) => {
   let {qttSupply} = req.body;
   const {typeSupply} = req.body;
   let sum = 0;
-
   const s = new Suprimento ({nameSupply, qttSupply, typeSupply})
 
-  if (s.length == 0){
-    console.log("Entrei no primeiro if")
-    s.save();
-    s.push({nameSupply, qttSupply, typeSupply})
-    res.status(200).send(s);
-  }
-  else {
 
-    for (let i=0; i<s.length; i++){
-      if(nameSupply === s[i].nameSupply && typeSupply === s[i].typeSupply){
-        sum = qttSupply + s[i].qttSupply;
-        s[i].qttSupply = sum;
-        console.log("Entrei no primeiro else")
-        s.save();
-        res.status(200).send(s);
-      }
-      else{
-        console.log("Entrei no segundo else")
-        s.push({nameSupply, qttSupply, typeSupply})
-      }
+  
+  
+  // if (Suprimento.findOne({nameSupply: s.nameSupply}).then(doc => {
+  //   Suprimento.updateOne(
+  //     {$inc: {qttSupply: s.qttSupply}}
+  //     )
+  // })
+  // .catch(err => {
+  //   console.error(err)
+  // }));
+
+  Suprimento.findOne({nameSupply: req.body.nameSupply }, function (err, suprimento) {
+    if (err) {
+      console.error(err)
     }
-  }
+    
+    if (suprimento) {
+      console.log ("Entrei if")
+      Suprimento.updateOne (
+        { nameSupply: req.body.nameSupply},
+        {$inc: {qttSupply: req.body.qttSupply}}
+      )
+      console.log(suprimento)
 
-  Suprimento.find({nameSupply: "Agua"}).then(doc => {
-    console.log(doc)
+    }
+
+    else {
+      s.save();
+      console.log ("else")
+    }
   })
-  .catch(err => {
-    console.error(err)
-  })
-  s.save();
-  console.log("Sai de ambos os else e do if")
+
+  // console.log("Sai de ambos os else e do if")
+  // console.log(s)
   res.status(201).json({mensagem: 'Suprimento inserido'})
 
 });
