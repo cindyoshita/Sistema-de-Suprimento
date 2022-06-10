@@ -5,7 +5,7 @@ const mongoose = require ('mongoose');
 const { Console } = require('console');
 const Suprimento = require ('./models/suprimento');
 const { db } = require('./models/suprimento');
-const suprimento = require('./models/suprimento');
+const Usuario = require('./models/usuario');
 
 mongoose.connect('mongodb+srv://SistemaSuprimentos:SistemaSuprimentos@cluster0.a8v7sgo.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
@@ -74,7 +74,7 @@ app.post('/suprimentos', (req, res) => {
       console.log ("Entrei if")
       Suprimento.updateOne (
         { nameSupply: req.body.nameSupply},
-        {$inc: {qttSupply: req.body.qttSupply}}
+        {$inc: {qttSupply: +req.body.qttSupply}}
       )
       console.log(suprimento)
 
@@ -103,19 +103,27 @@ app.post('/usuario', (req, res) => {
   contadorUsuario++;
   const {userName} = req.body;
   const {password} = req.body;
+  const u = new Usuario({userName, password})
 
-  usuarios.push({userName, password})
-
-  for(let i=0; i<usuarios.length; i++){
-    if (userName === usuarios[i].userName && password === usuarios[i].password){
-
-      res.status(401).send("Usuario ja cadastrado")
-
+  Usuario.findOne({userName: req.body.userName, password: req.body.password }, function (err, usuario) {
+    if (err) {
+      console.error(err)
+      res.status(201).send(err);
     }
-      }
+    
+    if (usuario) {
+      console.log("Usuario encontrado")
+      res.status(201).json({mensagem: 'Usuario ja cadastrado'})
+    }
 
-    console.log(usuarios)
-    res.status(201).send(usuarios[contadorUsuario]);
+    else {
+      console.log("else usuario")
+      u.save();
+      res.status(201).json({mensagem: 'Usuario inserido'})
+    }
+  })
+
+    
 
 });
 
