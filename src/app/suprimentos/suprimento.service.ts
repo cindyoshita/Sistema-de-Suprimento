@@ -16,12 +16,12 @@ export class SuprimentoService {
 getSuprimentos(): Suprimento[] {
  return [...this.suprimento];
  }
- adicionarSuprimento(tipo: string) {
+adicionarSuprimento(tipo: string) {
   const suprimentos: Suprimento = {
   tipo: tipo,
   
   };
-  this.httpClient.post<{mensagem: string}> ('http://localhost:3000/api/suprimento',suprimentos).subscribe(
+  this.httpClient.put<{mensagem: string}> ('localhost:4000/suprimentos',suprimentos).subscribe(
  (dados) => {
  console.log(dados.mensagem);
  this.suprimento.push(suprimentos);
@@ -36,4 +36,12 @@ getSuprimentos(): Suprimento[] {
   getListaDeSuprimentosAtualizadaObservable() {
     return this.listaSuprimentosAtualizada.asObservable();
     }
+
+  addSuprimentos(nameSupply: string, qttSupply: number){
+    this.httpClient.post<{mensagem: string}> ('localhost:4000/suprimentos', {nameSupply, qttSupply})
+  }
+
+  getSuprimentosNovo(){
+    this.httpClient.get<{mensagem: string}> ('localhost:4000/suprimentos')
+  }
 }
