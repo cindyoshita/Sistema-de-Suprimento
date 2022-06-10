@@ -7,6 +7,7 @@ const Suprimento = require ('./models/suprimento');
 const { db } = require('./models/suprimento');
 const Usuario = require('./models/usuario');
 
+
 mongoose.connect('mongodb+srv://SistemaSuprimentos:SistemaSuprimentos@cluster0.a8v7sgo.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
  console.log ("Conexão OK")
@@ -50,15 +51,13 @@ app.post('/suprimentos', (req, res) => {
   Suprimento.findOne({nameSupply: req.body.nameSupply, typeSupply: req.body.typeSupply }, function (err, suprimento) {
     if (err) {
       console.error(err)
-      res.status(401).json(err)
+      res.status(500).json(err)
     }
     
     if (suprimento) {
       console.log ("Entrei if")
-      Suprimento.updateOne (
-        { nameSupply: req.body.nameSupply},
-        {$inc: {qttSupply: +req.body.qttSupply}}
-      )
+      suprimento.qttSupply += req.body.qttSupply
+      suprimento.save();
       res.status(200).json(suprimento)
     }
 
@@ -94,7 +93,7 @@ app.post('/usuario', (req, res) => {
     
     if (usuario) {
       console.log("Usuario ja cadastrado")
-      res.status(201).json({mensagem: 'Usuario ja cadastrado'})
+      res.status(400).json({mensagem: 'Usuario ja cadastrado'})
     }
 
     else {
@@ -115,7 +114,7 @@ app.post('/login', (req, res) => {
     Usuario.findOne({userName: req.body.userName, password: req.body.password }, function (err, usuario) {
       if (err) {
         console.error(err)
-        res.status(401).send(err);
+        res.status(500).send(err);
       }
       
       if (usuario) {
@@ -125,7 +124,7 @@ app.post('/login', (req, res) => {
   
       else {
         console.log("else login")
-        res.status(201).json({mensagem: 'Usuario não encontrado'})
+        res.status(401).json({mensagem: 'Usuario não encontrado'})
       }
     })
 })
