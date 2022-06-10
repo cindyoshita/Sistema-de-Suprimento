@@ -34,16 +34,10 @@ let contadorUsuario = 0;
 
 app.get('/suprimentos', (req, res) => {
 
-  Suprimentos.find().then(documents => {
-    res.status(200).json({
-    mensagem: "Tudo OK",
-    suprimentos: documents
-    });
-    })
-
-
-  res.status(200).send(suprimentos)
-  console.log(documents)
+  Suprimento.find().then(documents => {
+    res.status(201).json(documents)
+  })
+  
 });
 
 app.post('/suprimentos', (req, res) => {
