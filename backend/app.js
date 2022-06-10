@@ -65,7 +65,7 @@ app.post('/suprimentos', (req, res) => {
   //   console.error(err)
   // }));
 
-  Suprimento.findOne({nameSupply: req.body.nameSupply }, function (err, suprimento) {
+  Suprimento.findOne({nameSupply: req.body.nameSupply, typeSupply: req.body.typeSupply }, function (err, suprimento) {
     if (err) {
       console.error(err)
     }
@@ -108,11 +108,11 @@ app.post('/usuario', (req, res) => {
   Usuario.findOne({userName: req.body.userName, password: req.body.password }, function (err, usuario) {
     if (err) {
       console.error(err)
-      res.status(201).send(err);
+      res.status(401).send(err);
     }
     
     if (usuario) {
-      console.log("Usuario encontrado")
+      console.log("Usuario ja cadastrado")
       res.status(201).json({mensagem: 'Usuario ja cadastrado'})
     }
 
@@ -131,12 +131,22 @@ app.post('/login', (req, res) => {
     const {userName} = req.body;
     const {password} = req.body;
 
-    for(let i=0; i<usuarios.length; i++){
-        if (userName === usuarios[i].userName && password === usuarios[i].password){
-            res.status(200).send("Usuario logado")
-        }
-    }
-    res.status(401).send("Falha ao logar")
+    Usuario.findOne({userName: req.body.userName, password: req.body.password }, function (err, usuario) {
+      if (err) {
+        console.error(err)
+        res.status(401).send(err);
+      }
+      
+      if (usuario) {
+        console.log("Usuario encontrado")
+        res.status(200).json({mensagem: 'Logado'})
+      }
+  
+      else {
+        console.log("else login")
+        res.status(201).json({mensagem: 'Usuario não encontrado'})
+      }
+    })
 })
 
 app.listen(4000, () => {
