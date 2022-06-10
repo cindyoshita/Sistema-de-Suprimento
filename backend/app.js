@@ -37,7 +37,7 @@ app.get('/suprimentos', (req, res) => {
   Suprimento.find().then(documents => {
     res.status(201).json(documents)
   })
-  
+
 });
 
 app.post('/suprimentos', (req, res) => {
@@ -47,21 +47,10 @@ app.post('/suprimentos', (req, res) => {
   let sum = 0;
   const s = new Suprimento ({nameSupply, qttSupply, typeSupply})
 
-
-  
-  
-  // if (Suprimento.findOne({nameSupply: s.nameSupply}).then(doc => {
-  //   Suprimento.updateOne(
-  //     {$inc: {qttSupply: s.qttSupply}}
-  //     )
-  // })
-  // .catch(err => {
-  //   console.error(err)
-  // }));
-
   Suprimento.findOne({nameSupply: req.body.nameSupply, typeSupply: req.body.typeSupply }, function (err, suprimento) {
     if (err) {
       console.error(err)
+      res.status(401).json(err)
     }
     
     if (suprimento) {
@@ -70,19 +59,17 @@ app.post('/suprimentos', (req, res) => {
         { nameSupply: req.body.nameSupply},
         {$inc: {qttSupply: +req.body.qttSupply}}
       )
-      console.log(suprimento)
-
+      res.status(200).json(suprimento)
     }
 
     else {
       s.save();
       console.log ("else")
+      res.status(201).json(suprimento)
     }
   })
 
-  // console.log("Sai de ambos os else e do if")
-  // console.log(s)
-  res.status(201).json({mensagem: 'Suprimento inserido'})
+  
 
 });
 
