@@ -65,7 +65,7 @@ app.post('/suprimentos', (req, res) => {
     else {
       s.save();
       console.log ("else")
-      res.status(201).json(suprimento)
+      res.status(201).json(s)
     }
   })
 
@@ -86,7 +86,7 @@ app.post('/usuario', (req, res) => {
   const {password} = req.body;
   const u = new Usuario({userName, password})
 
-  Usuario.findOne({userName: req.body.userName, password: req.body.password }, function (err, usuario) {
+  Usuario.findOne({userName: req.body.userName}, function (err, usuario) {
     if (err) {
       console.error(err)
       res.status(401).send(err);
