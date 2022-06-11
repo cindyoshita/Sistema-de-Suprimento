@@ -17,7 +17,7 @@ onAdicionarUsuario(form:NgForm) {
   if (form.invalid){
     return;
   }
-  this.usuarioService.adicionarUsuario(
+  this.usuarioService.addUsuario(
     form.value.usuario,
     form.value.senha,
     );
