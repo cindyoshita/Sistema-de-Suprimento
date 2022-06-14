@@ -18,8 +18,8 @@ onAdicionarUsuario(form:NgForm) {
     return;
   }
   this.usuarioService.addUsuario(
-    form.value.usuario,
-    form.value.senha,
+    form.value.userName,
+    form.value.password,
     );
     form.resetForm();
 

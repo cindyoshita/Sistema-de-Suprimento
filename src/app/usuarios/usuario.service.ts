@@ -16,10 +16,10 @@ export class UsuarioService {
  getUsuarios(): Usuario[] {
  return [...this.usuarios];
  }
-adicionarUsuario(usuario: string, senha: string) {
+adicionarUsuario(userName: string, password: string) {
   const usuarios: Usuario = {
-  usuario: usuario,
-  senha: senha,
+  userName: userName,
+  password: password,
   };
   this.httpClient.post<{mensagem: string}> ('http://localhost:3000/api/clientes',usuarios).subscribe(
  (dados) => {
@@ -42,8 +42,19 @@ adicionarUsuario(usuario: string, senha: string) {
   }
 
   addUsuario(userName: string, password: string){
-    this.httpClient.post<{mensagem: string}> ('localhost:4000/usuario',{userName, password})
-  }
+    const usuarios: Usuario = {
+      userName: userName,
+      password: password,
+      };
+    this.httpClient.post<{mensagem: string}> ('http://localhost:4000/usuario',usuarios).subscribe(
+      (dados) => {
+        console.log(dados.mensagem);
+        this.usuarios.push(usuarios);
+        this.listaUsuariosAtualizada.next([...this.usuarios])
+      }
+    )
+    this.usuarios.push(usuarios);
+    }
 
 }
 

@@ -53,7 +53,7 @@ app.post('/suprimentos', (req, res) => {
       console.error(err)
       res.status(500).json(err)
     }
-    
+
     if (suprimento) {
       console.log ("Entrei if")
       suprimento.qttSupply += req.body.qttSupply
@@ -68,7 +68,7 @@ app.post('/suprimentos', (req, res) => {
     }
   })
 
-  
+
 
 });
 
@@ -90,7 +90,7 @@ app.post('/usuario', (req, res) => {
       console.error(err)
       res.status(401).send(err);
     }
-    
+
     if (usuario) {
       console.log("Usuario ja cadastrado")
       res.status(400).json({mensagem: 'Usuario ja cadastrado'})
@@ -103,7 +103,7 @@ app.post('/usuario', (req, res) => {
     }
   })
 
-    
+
 
 });
 
@@ -116,12 +116,12 @@ app.post('/login', (req, res) => {
         console.error(err)
         res.status(500).send(err);
       }
-      
+
       if (usuario) {
         console.log("Usuario encontrado")
         res.status(200).json({mensagem: 'Logado'})
       }
-  
+
       else {
         console.log("else login")
         res.status(401).json({mensagem: 'Usuario não encontrado'})
