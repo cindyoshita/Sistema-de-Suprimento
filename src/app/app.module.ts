@@ -20,12 +20,12 @@ import { UsuarioService } from './usuarios/usuario.service';
 import { SuprimentoInserirComponent } from './suprimentos/suprimentos-inserir/suprimento-inserir.component';
 import { SuprimentoService } from './suprimentos/suprimento.service';
 import { SuprimentoListaComponent } from './suprimentos/suprimentos-lista/suprimento-lista.component';
-
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,UsuarioInserirComponent,CabecalhoComponent,UsuarioListaComponent,SuprimentoInserirComponent,SuprimentoListaComponent,
+    AppComponent,UsuarioInserirComponent,CabecalhoComponent,UsuarioListaComponent,SuprimentoInserirComponent,SuprimentoListaComponent,LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +42,6 @@ import { SuprimentoListaComponent } from './suprimentos/suprimentos-lista/suprim
 
   ],
   providers: [UsuarioService,SuprimentoService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,LoginComponent]
 })
 export class AppModule { }

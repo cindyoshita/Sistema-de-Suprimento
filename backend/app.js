@@ -3,9 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require ('mongoose');
 const { Console } = require('console');
-const Suprimento = require ('./models/suprimento');
-const { db } = require('./models/suprimento');
-const Usuario = require('./models/usuario');
+const Suprimento = require ('../src/app/models/suprimento');
+const { db } = require('../src/app/models/suprimento');
+const Usuario = require('../src/app/models/usuario');
 
 
 mongoose.connect('mongodb+srv://SistemaSuprimentos:SistemaSuprimentos@cluster0.a8v7sgo.mongodb.net/?retryWrites=true&w=majority')
@@ -97,7 +97,6 @@ app.post('/usuario', (req, res) => {
     }
 
     else {
-      console.log("else usuario")
       u.save();
       res.status(201).json({mensagem: 'Usuario inserido'})
     }
