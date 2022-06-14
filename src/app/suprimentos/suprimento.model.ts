@@ -1,3 +1,5 @@
 export interface Suprimento {
-  tipo: string;
+  nameSupply: string;
+  qttSupply: number;
+  typeSupply: string;
   }

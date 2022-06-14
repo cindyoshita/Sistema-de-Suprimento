@@ -17,10 +17,11 @@ onAdicionarSuprimento(form:NgForm) {
   if (form.invalid){
     return;
   }
-  this.suprimentoService.adicionarSuprimento(
-    form.value.suprimento,
+  this.suprimentoService.addSuprimentos(
+    form.value.nameSupply,
+    form.value.qttSupply,
+    form.value.typeSupply,
     );
     form.resetForm();
-
   }
 }
