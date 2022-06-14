@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
-import { User } from '../models/user.model';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Component,EventEmitter, Output} from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -11,38 +9,22 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.css'],
   providers: [ LoginService ]
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent{
+  constructor(public loginService: LoginService) {}
 
-  public user : User;
-
-  constructor(private loginService: LoginService,private router: Router,private httpClient: HttpClient,) {
-  	this.user = new User();
-  }
-
-
-
-  validateLogin() {
-  	if(this.user.username && this.user.password) {
-  		this.loginService.validateLogin(this.user).subscribe(result => {
-        if(result['mensagem'] === 'Logado') {
-          this.router.navigate(['/home']);
-        } else {
-          alert('Wrong username and/or password');
-        }
-
-      },
-      // error => {
-      //   console.log('error is ', error);
-      // }
+  onLogarUsuario(form:NgForm) {
+    console.log('inserindo usuário...');
+  
+    if (form.invalid){
+      return;
+    }
+    this.loginService.verificarLogin(
+      form.value.userName,
+      form.value.password,
       );
-  	} else {
-  		alert('enter user name and password');
-  	}
-  }
-
-
-  ngOnInit(): void {
+      form.resetForm();
+  
+    }
 
   }
 
-}

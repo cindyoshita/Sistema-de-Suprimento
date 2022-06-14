@@ -116,7 +116,7 @@ app.post('/login', (req, res) => {
         console.error(err)
         res.status(200).send(err);
       }
-
+      
       if (usuario) {
         console.log("Usuario encontrado")
         res.status(200).json({mensagem: 'Logado',data: usuario})
