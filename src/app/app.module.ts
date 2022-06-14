@@ -40,8 +40,9 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
 
 
+
   ],
   providers: [UsuarioService,SuprimentoService],
-  bootstrap: [AppComponent,LoginComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,16 +1,12 @@
-<app-cabecalho></app-cabecalho>
 <main>
-<app-usuario-inserir></app-usuario-inserir>
-<app-usuario-lista></app-usuario-lista>
-<app-suprimento-inserir></app-suprimento-inserir>
-<app-suprimento-lista></app-suprimento-lista>
-
-<hr>
-<a routerLink="/login" routerLinkActive="selected">Login</a><br>
-
-<a routerLink="/home"routerLinkActive="selected">Home</a><br>
-
-
+  <nav>
+    <a class="button" routerLink="/home">Home</a> |
+    <a class="button" routerLink="/login">login</a>|
+    <a class="button" routerLink="/suprimento">Suprimento</a>|
+    <a class="button" routerLink="/Usuario">Usuario</a>
+  </nav>
+<router-outlet></router-outlet>
 
 </main>
+
 

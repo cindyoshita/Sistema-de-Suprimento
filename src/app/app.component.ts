@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Usuario } from './usuarios/usuario.model';
 import { Suprimento } from './suprimentos/suprimento.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
