@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user.model';
+import { Usuario } from '../usuarios/usuario.model';
 import { Subject } from 'rxjs';
 
 
 @Injectable()
 export class LoginService {
 
-	private usuarios: User[] = [];
- private listaUsuariosAtualizada = new Subject<User[]>();
+	private usuarios: Usuario[] = [];
+ private listaUsuariosAtualizada = new Subject<Usuario[]>();
 
  constructor (private httpClient: HttpClient){
 }
 
 
- getUsuarios(): User[] {
+ getUsuarios(): Usuario[] {
  return [...this.usuarios];
  }
 
@@ -23,7 +23,7 @@ export class LoginService {
     }
 
   verificarLogin(userName: string, password: string){
-	const usuarios: User = {
+	const usuarios: Usuario = {
 		userName: userName,
 		password: password,
 		};
