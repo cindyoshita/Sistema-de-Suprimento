@@ -6,7 +6,7 @@
 <mat-error r *ngIf="nameSupply.invalid">Digite um suprimento válido</mat-error>
 </mat-form-field>
 <mat-form-field>
-<input type="text" required minlength="1" matInput placeholder="Quantidade" name="qttSupply" ngModel #qttSupply ="ngModel"/>
+<input type="number" required minlength="1" matInput placeholder="Quantidade" name="qttSupply" ngModel #qttSupply ="ngModel"/>
 <mat-error r *ngIf="qttSupply.invalid">Digite uma quantidade válida</mat-error>
 </mat-form-field>
 <mat-form-field>
