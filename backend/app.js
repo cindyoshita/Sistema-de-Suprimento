@@ -34,6 +34,8 @@ let usuarios = [];
 let contadorUsuario = 0;
 
 
+
+
 app.get('/suprimentos', (req, res) => {
 
   Suprimento.find().then(documents => {
@@ -116,15 +118,15 @@ app.post('/login', (req, res) => {
         console.error(err)
         res.status(200).send(err);
       }
-      
+
       if (usuario) {
-        console.log("Usuario encontrado")
+        console.log("Usuario encontrado,Logando!")
         res.status(200).json({mensagem: 'Logado',data: usuario})
       }
 
       else {
-        console.log("else login")
         res.status(200).json({mensagem: 'Usuario não encontrado'})
+        console.error("Usuario e/ou senha incorretos")
       }
     })
 })

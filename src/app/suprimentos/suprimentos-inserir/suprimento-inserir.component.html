@@ -10,10 +10,16 @@
 <mat-error r *ngIf="qttSupply.invalid">Digite uma quantidade válida</mat-error>
 </mat-form-field>
 <mat-form-field>
-<input type="text" required minlength="1" matInput placeholder="Unidade de medida" name="typeSupply" ngModel #typeSupply ="ngModel"/>
+<input type="text" required minlength="1" matInput placeholder="Unidade de medida" name="typeSupply" id="typeSupply" list="tipos" ngModel #typeSupply ="ngModel"/>
 <mat-error r *ngIf="typeSupply.invalid">Digite uma unidade válida</mat-error>
 </mat-form-field>
 <button color="primary" mat-raised-button>Inserir Suprimento</button>
 </form>
 </mat-card>
 
+<datalist id="tipos">
+  <option>Kg</option>
+  <option>g</option>
+  <option>L</option>
+  <option>ml</option>
+</datalist>
