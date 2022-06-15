@@ -13,7 +13,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'suprimento', component: SuprimentoInserirComponent, canActivate : [AuthGuardService] },
   { path: 'usuario', component: UsuarioInserirComponent, canActivate : [AuthGuardService]},
-  { path: 'lista', component: SuprimentoListaComponent,/*canActivate : [AuthGuardService]*/},
+  { path: 'lista', component: SuprimentoListaComponent,canActivate : [AuthGuardService]},
 
 ];
 

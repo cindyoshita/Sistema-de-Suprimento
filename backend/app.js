@@ -59,7 +59,7 @@ app.post('/suprimentos', (req, res) => {
     }
 
     if (suprimento) {
-      console.log ("Entrei if")
+      //console.log ("Entrei if")
       suprimento.qttSupply += req.body.qttSupply
       suprimento.save();
       res.status(200).json(suprimento)
@@ -67,7 +67,7 @@ app.post('/suprimentos', (req, res) => {
 
     else {
       s.save();
-      console.log ("else")
+      //console.log ("else")
       res.status(201).json(s)
     }
   })

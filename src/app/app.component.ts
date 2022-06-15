@@ -14,6 +14,8 @@ import { AuthService } from '../app/auth/auth.service';
 export class AppComponent {
   title = 'projeto-semestral';
   usuarios: Usuario[] = [];
+  public ttipo: number
+
   onUsuarioAdicionado(usuarios) {
     this.usuarios = [...this.usuarios,usuarios]
     }
@@ -23,9 +25,10 @@ export class AppComponent {
     };
 
 
-constructor (private authService:AuthService,
+constructor (public authService:AuthService,
   private router:Router) {
 }
+
 
 logout() {
 this.authService.logoutUser();

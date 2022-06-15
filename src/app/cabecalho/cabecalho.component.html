@@ -1,1 +1,12 @@
-<mat-toolbar color="primary">Sistema de Suprimentos</mat-toolbar>
+<mat-toolbar color="primary"><nav >
+  <a class="button" routerLink="/home">Home</a> |
+  <a class="button" routerLink="/login">login</a> |
+  <a class="button" routerLink="/suprimento">Suprimento</a> |
+  <a class="button" routerLink="/usuario">Usuario</a> |
+  <a class="button"  routerLink="/lista" routerLinkActive="active">lista</a> |
+  <a class="button" routerLink="/home" (click)="logout()">Log out</a>
+</nav>
+</mat-toolbar>
+
+
+<router-outlet></router-outlet>
