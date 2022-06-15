@@ -15,7 +15,7 @@ export class AuthGuardService implements CanActivate {
                 state: RouterStateSnapshot): boolean|UrlTree {
 
         if (!this.authService.isUserLoggedIn()) {
-            alert('Você não tem permissão de ver esta pagina! Favor fazer login.');
+            alert('Você não tem permissão para ver esta pagina! Favor faça login ou cadastre-se.');
 
             this.router.navigate(["login"],{ queryParams: { retUrl: route.url} });
             return false;

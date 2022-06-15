@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Usuario } from './usuario.model';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 
 @Injectable({providedIn:"root"})
 export class UsuarioService {
  private usuarios: Usuario[] = [];
  private listaUsuariosAtualizada = new Subject<Usuario[]>();
 
- constructor (private httpClient: HttpClient){
+ constructor (private httpClient: HttpClient,private router: Router){
 }
 
 
@@ -35,6 +35,11 @@ export class UsuarioService {
         console.log(dados.mensagem);
         this.usuarios.push(usuarios);
         this.listaUsuariosAtualizada.next([...this.usuarios])
+
+        if(dados['mensagem'] ==="Usuario inserido"){
+          this.router.navigate(['/login']);
+        }else {alert('Esse usuário já existe, crie um novo!')}
+        this.usuarios.push(usuarios);
       }
     )
     this.usuarios.push(usuarios);

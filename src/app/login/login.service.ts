@@ -35,8 +35,8 @@ export class LoginService {
 		  this.listaUsuariosAtualizada.next([...this.usuarios])
 
       if(dados['mensagem'] ==="Logado"){
-        this.router.navigate(['/home']);
-      }else {alert('Usuário e/ou senha incoretos')}
+        this.router.navigate(['/suprimento']);
+      }else {alert('Usuário e/ou senha incorretos')}
       this.usuarios.push(usuarios);
 		}
 	  )

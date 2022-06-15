@@ -8,8 +8,10 @@
 <mat-form-field>
 <input type="password" required minlength="8"matInput placeholder="Senha"  name="password" ngModel #password="ngModel"/>
 <mat-error *ngIf="password.invalid">Digite uma senha válida</mat-error>
-
 </mat-form-field>
-<button color="primary" mat-raised-button>Inserir Usuário</button>
+<button color="primary" mat-raised-button>Entrar na Conta</button>
+<br>
+<br>
+<button color="primary" routerLink="/usuario" mat-raised-button>Inserir Novo Usuário</button>
 </form>
 </mat-card>

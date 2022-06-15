@@ -12,7 +12,7 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent},
   { path: 'suprimento', component: SuprimentoInserirComponent, canActivate : [AuthGuardService] },
-  { path: 'usuario', component: UsuarioInserirComponent, canActivate : [AuthGuardService]},
+  { path: 'usuario', component: UsuarioInserirComponent},
   { path: 'lista', component: SuprimentoListaComponent,canActivate : [AuthGuardService]},
 
 ];
