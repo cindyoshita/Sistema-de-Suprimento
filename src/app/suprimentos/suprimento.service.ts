@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Suprimento } from './suprimento.model';
-import { Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -14,12 +14,12 @@ export class SuprimentoService {
 
 
 getSuprimentos(): Suprimento[] {
- return [...this.suprimento];
- }
+  return [...this.suprimento];
+  }
 
-  getListaDeSuprimentosAtualizadaObservable() {
-    return this.listaSuprimentosAtualizada.asObservable();
-    }
+   getListaDeSuprimentosAtualizadaObservable() {
+     return this.listaSuprimentosAtualizada.asObservable();
+     }
 
   addSuprimentos(nameSupply: string, qttSupply: number, typeSupply: string){
     const suprimentos : Suprimento = {
@@ -40,4 +40,8 @@ getSuprimentos(): Suprimento[] {
   getSuprimentosNovo(){
     this.httpClient.get<{mensagem: string}> ('http://localhost:4000/suprimentos')
   }
+
+  // getSuprimentosTeste(): Observable<Suprimento[]>{
+  //   return of(this.getSuprimentosNovo)
+  // }
 }

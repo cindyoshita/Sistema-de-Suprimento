@@ -11,16 +11,7 @@ import { Subscription, Observable } from 'rxjs';
 })
 export class SuprimentoListaComponent implements OnInit, OnDestroy {
 
-  /* usuarios = [
-    {
-      usuario:'aaaa',
-      senha:'123456',
-    },
-    {
-      usuario:'bbbb',
-      senha:'abcdef',
-    }
-  ] */
+
   suprimentos:Suprimento[]=[];
   private suprimentosSubscription: Subscription;
   constructor(public suprimentoService: SuprimentoService) {}

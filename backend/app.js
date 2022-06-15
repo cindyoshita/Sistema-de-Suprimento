@@ -40,6 +40,7 @@ app.get('/suprimentos', (req, res) => {
 
   Suprimento.find().then(documents => {
     res.status(201).json(documents)
+    console.log(documents)
   })
 
 });

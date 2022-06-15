@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http'
@@ -22,6 +22,9 @@ import { SuprimentoService } from './suprimentos/suprimento.service';
 import { SuprimentoListaComponent } from './suprimentos/suprimentos-lista/suprimento-lista.component';
 import { LoginComponent } from './login/login.component';
 
+import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './auth/auth-guard.service';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +45,7 @@ import { LoginComponent } from './login/login.component';
 
 
   ],
-  providers: [UsuarioService,SuprimentoService],
+  providers: [UsuarioService,SuprimentoService,AuthGuardService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
