@@ -32,6 +32,7 @@ getSuprimentos(): Suprimento[] {
         console.log(dados.mensagem);
         this.suprimento.push(suprimentos);
         this.listaSuprimentosAtualizada.next([...this.suprimento])
+        alert('Suprimento inserido com sucesso!')
       }
     )
     this.suprimento.push(suprimentos);

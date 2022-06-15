@@ -29,6 +29,7 @@ export class CabecalhoComponent implements OnInit {
 
   logout() {
     this.authService.logoutUser();
-    this.router.navigate(['home']);
+    alert('Saiu com Sucesso!')
+    this.router.navigate(['login']);
     }
 }

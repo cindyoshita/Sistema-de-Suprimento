@@ -32,10 +32,10 @@ export class AuthService {
 
           if(dados['mensagem'] ==="Logado"){
             this.isloggedIn=true
-            this.router.navigate(['/home']);
+            this.router.navigate(['/suprimento']);
             this.usuarios.push(usuarios)
             return of(this.isloggedIn);
-          }else {alert('Usuário e/ou senha incoretos')
+          }else {alert('Usuário e/ou senha incorretos')
           this.usuarios.push(usuarios)
         return this.isloggedIn=false}
         }

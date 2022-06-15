@@ -37,6 +37,7 @@ export class UsuarioService {
         this.listaUsuariosAtualizada.next([...this.usuarios])
 
         if(dados['mensagem'] ==="Usuario inserido"){
+          alert('Usuário inserido, faça seu login!')
           this.router.navigate(['/login']);
         }else {alert('Esse usuário já existe, crie um novo!')}
         this.usuarios.push(usuarios);
