@@ -4,10 +4,7 @@
   <p>Quantidade:{{suprimento.qttSupply}}</p>
   <hr />
   <p>Unidade de medida:{{suprimento.typeSupply}}</p>
-<mat-action-row>
-  <button mat-button color="primary">EDITAR</button>
-  <button mat-button color="warn" (click)="onDelete(suprimento.id)">REMOVER</button>
-</mat-action-row>
+
 </mat-expansion-panel>
   </mat-accordion>
   <p class="mat-body-1" style="text-align: center;" *ngIf="suprimentos.length <= 0">
