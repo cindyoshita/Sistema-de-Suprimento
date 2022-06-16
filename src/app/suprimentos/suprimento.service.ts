@@ -59,10 +59,10 @@ getSuprimentos (idSupply: string){
         .pipe(map((dados) => {
           return dados.suprimentos.map((suprimento => {
             return {
-              id: suprimento._id,
-              nome: suprimento.nome,
-              fone: suprimento.fone,
-              email: suprimento.email
+              id: suprimento.id,
+              nameSupply: suprimento.nameSupply,
+              qttSupply: suprimento.qttSupply,
+              typeSupply: suprimento.typeSupply
             }
           }))
         }))
