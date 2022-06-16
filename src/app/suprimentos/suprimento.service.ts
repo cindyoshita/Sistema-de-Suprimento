@@ -13,9 +13,9 @@ export class SuprimentoService {
 }
 
 
-getSuprimentos(): Suprimento[] {
-  return [...this.suprimentos];
-  }
+getSuprimentos (idSupply: string){
+  return {...this.suprimentos.find(sup => sup.id === idSupply)}
+}
 
    getListaDeSuprimentosAtualizadaObservable() {
      return this.listaSuprimentosAtualizada.asObservable();
@@ -67,8 +67,8 @@ getSuprimentos(): Suprimento[] {
           }))
         }))
         .subscribe(
-          (dados) => {
-            this.suprimentos = dados.suprimentos;
+          (suprimentos) => {
+            this.suprimentos = suprimentos;
             this.listaSuprimentosAtualizada.next([...this.suprimentos]);
           }
         )
