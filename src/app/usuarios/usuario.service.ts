@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 @Injectable({providedIn:"root"})
 export class UsuarioService {
+  hide=true;
  private usuarios: Usuario[] = [];
  private listaUsuariosAtualizada = new Subject<Usuario[]>();
 

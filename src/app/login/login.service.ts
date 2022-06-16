@@ -10,6 +10,7 @@ export class LoginService {
 
 	private usuarios: Usuario[] = [];
  private listaUsuariosAtualizada = new Subject<Usuario[]>();
+ hide = true;
 
  constructor (private httpClient: HttpClient,private router: Router	){
 }

@@ -1,22 +1,27 @@
 <h2> Inserção de Suprimentos</h2>
 <mat-card>
-<form (submit)="onAdicionarSuprimento(usuarioForm)" #usuarioForm="ngForm">
-<mat-form-field>
-<input type="text" required minlength="1" matInput placeholder="Suprimento" name="nameSupply" ngModel #nameSupply ="ngModel"/>
+<form (submit)="onSalvarSuprimento(usuarioForm)" #usuarioForm="ngForm">
+<mat-form-field appearance="outline">
+<input type="text" required minlength="1" matInput placeholder="Suprimento" name="nameSupply" [ngModel]="suprimento?.nameSupply" #nameSupply ="ngModel"/>
 <mat-error r *ngIf="nameSupply.invalid">Digite um suprimento válido</mat-error>
 </mat-form-field>
-<mat-form-field>
-<input type="number" required minlength="1" matInput placeholder="Quantidade" name="qttSupply" ngModel #qttSupply ="ngModel"/>
+<mat-form-field appearance="outline">
+<input type="number" required minlength="1" matInput placeholder="Quantidade" name="qttSupply" [ngModel]="suprimento?.qttSupply" #qttSupply ="ngModel"/>
 <mat-error r *ngIf="qttSupply.invalid">Digite uma quantidade válida</mat-error>
 </mat-form-field>
-<mat-form-field>
-<input type="text" required minlength="1" matInput placeholder="Unidade de medida" name="typeSupply" id="typeSupply" list="tipos" ngModel #typeSupply ="ngModel"/>
-<mat-error r *ngIf="typeSupply.invalid">Digite uma unidade válida</mat-error>
+<mat-form-field appearance="outline">
+  <mat-label>unidade de Medida</mat-label>
+  <mat-select #typeSupply name="typeSupply" id="typeSupply" [ngModel]="suprimento?.typeSupply">
+  <mat-option value="Kg">Kg</mat-option>
+   <mat-option value="L">L</mat-option>
+  </mat-select>
+<mat-error r *ngIf="typeSupply=== null">Digite uma unidade válida</mat-error>
 </mat-form-field>
-<button color="primary" mat-raised-button>Inserir Suprimento</button>
+<button color="primary" mat-raised-button>Salvar Suprimento</button>
 </form>
 </mat-card>
 
+<!-- <input type="input" required minlength="1" matInput placeholder="Unidade de medida" name="typeSupply" id="typeSupply" list="tipos" [ngModel]="suprimento?.typeSupply" #typeSupply ="ngModel"/> -->
 <datalist id="tipos">
   <option>Kg</option>
   <option>L</option>

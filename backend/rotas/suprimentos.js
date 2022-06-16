@@ -50,15 +50,49 @@ router.post('', (req, res) => {
 
 });
 
+
+router.put ("/:id", (req, res, next) => {
+  const suprimento = new Suprimento({
+  _id: req.params.id,
+  nameSupply: req.body.nameSupply,
+  qttSupply: req.body.qttSupply,
+  typeSupply: req.body.typeSupply
+  });
+  Suprimento.updateOne({_id: req.params.id}, suprimento)
+  .then ((resultado) => {
+  console.log (resultado)
+  });
+  res.status(200).json({mensagem: 'Atualização realizada com sucesso'})
+ });
+
+
+
+
+
+
+ router.get('/:id', (req, res, next) => {
+  Suprimento.findById(req.params.id).then(sup => {
+  if (sup){
+  res.status(200).json(sup);
+  }
+  else
+  res.status(404).json({mensagem: "Suprimento não encontrado!"})
+  })
+ });
+
+
+
+
+
 router.delete('/:id', (req, res, next) => {
   console.log("id: ", req.params.id);
-  Cliente.deleteOne({ _id: req.params.id }).then((resultado) => {
+  Suprimento.deleteOne({ _id: req.params.id }).then((resultado) => {
   console.log(resultado);
   res.status(200).json({ mensagem: "Suprimento removido" })
   });
  });
  router.get('/:id', (req, res, next) => {
-  Cliente.findById(req.params.id).then(cli => {
+  Suprimento.findById(req.params.id).then(cli => {
   if (cli) {
   res.status(200).json(cli);
   }

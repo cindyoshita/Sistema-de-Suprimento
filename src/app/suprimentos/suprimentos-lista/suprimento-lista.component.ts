@@ -18,7 +18,7 @@ export class SuprimentoListaComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
- this.suprimentoService.getSuprimentos1();
+ this.suprimentoService.getSuprimentos();
  this.suprimentosSubscription = this.suprimentoService
  .getListaDeSuprimentosAtualizadaObservable()
  .subscribe((suprimentos: Suprimento[]) => {

@@ -13,8 +13,10 @@ export class SuprimentoService {
 }
 
 
-getSuprimentos (idSupply: string){
-  return {...this.suprimentos.find(sup => sup.id === idSupply)}
+getSuprimento (idSuprimento: string){
+  // return {...this.suprimentos.find(sup => sup.id === idSuprimento)}
+  return this.httpClient.get<{_id: string, nameSupply: string, qttSupply: number, typeSupply: string
+  }>(`http://localhost:4000/suprimentos/${idSuprimento}`);
 }
 
    getListaDeSuprimentosAtualizadaObservable() {
@@ -38,11 +40,6 @@ getSuprimentos (idSupply: string){
     this.suprimentos.push(suprimentos);
   }
 
-  getSuprimentosNovo(){
-    this.httpClient.get<{mensagem: string}> ('http://localhost:4000/suprimentos')
-  }
-
-
 
 
   removerSuprimento (id: string): void{
@@ -53,13 +50,13 @@ getSuprimentos (idSupply: string){
 
 
 
-    getSuprimentos1(): void {
+    getSuprimentos(): void {
       this.httpClient.get<{mensagem: string,
         suprimentos: any}>('http://localhost:4000/suprimentos')
         .pipe(map((dados) => {
           return dados.suprimentos.map((suprimento => {
             return {
-              id: suprimento.id,
+              id: suprimento._id,
               nameSupply: suprimento.nameSupply,
               qttSupply: suprimento.qttSupply,
               typeSupply: suprimento.typeSupply
@@ -73,4 +70,18 @@ getSuprimentos (idSupply: string){
           }
         )
     }
+
+
+    atualizarSuprimento (id: string, nameSupply: string, qttSupply: number, typeSupply: string){
+      const suprimento: Suprimento = { id, nameSupply, qttSupply, typeSupply};
+      this.httpClient.put(`http://localhost:4000/Suprimentos/${id}`, suprimento)
+      .subscribe((res => {
+        const copia = [...this.suprimentos	];
+        const indice = copia.findIndex (sup => sup.id === suprimento.id);
+        copia[indice] = suprimento;
+        this.suprimentos = copia;
+        this.listaSuprimentosAtualizada.next([...this.suprimentos]);
+        }));
+
+}
 }

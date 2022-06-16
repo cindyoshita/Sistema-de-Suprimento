@@ -21,6 +21,8 @@ import { SuprimentoInserirComponent } from './suprimentos/suprimentos-inserir/su
 import { SuprimentoService } from './suprimentos/suprimento.service';
 import { SuprimentoListaComponent } from './suprimentos/suprimentos-lista/suprimento-lista.component';
 import { LoginComponent } from './login/login.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from  '@angular/material/icon';
 
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
@@ -41,6 +43,8 @@ import { AuthGuardService } from './auth/auth-guard.service';
     MatToolbarModule,
     MatExpansionModule,
     HttpClientModule,
+    MatSelectModule,
+    MatIconModule
 
 
 

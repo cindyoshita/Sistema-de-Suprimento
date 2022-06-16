@@ -11,6 +11,7 @@ import { AuthService } from '../auth/auth.service';
   providers: [ LoginService ]
 })
 export class LoginComponent{
+  hide = true;
   constructor(public loginService: LoginService,private authService: AuthService, ) {}
 
   onLogarUsuario(form:NgForm) {

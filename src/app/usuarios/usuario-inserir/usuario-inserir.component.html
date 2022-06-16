@@ -1,15 +1,21 @@
 <h2> Inserção de Usuários</h2>
 <mat-card>
 <form (submit)="onAdicionarUsuario(usuarioForm)" #usuarioForm="ngForm">
-<mat-form-field>
-<input type="text" required minlength="4" matInput placeholder="Usuário" name="userName" ngModel #userName="ngModel"/>
-<mat-error r *ngIf="userName.invalid">Digite um usuário válido</mat-error>
-</mat-form-field>
-<mat-form-field>
-<input type="password" required minlength="8"matInput placeholder="Senha"  name="password" ngModel #password="ngModel"/>
-<mat-error *ngIf="password.invalid">Digite uma senha válida</mat-error>
-
-</mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Usuário</mat-label>
+  <input type="text" required minlength="4" matInput placeholder="Usuário" name="userName" ngModel #userName="ngModel"/>
+  <mat-error r *ngIf="userName.invalid">Digite um usuário válido</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Senha</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'"required minlength = "8" matInput placeholder="Senha"  name="password" ngModel #password="ngModel">
+    <mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-icon-button>
+    <mat-error *ngIf="password.invalid">Digite uma senha válida</mat-error>
+  </mat-form-field>
+  <br>
+  <br>
 <button color="primary" mat-raised-button>Inserir Usuário</button>
 </form>
 </mat-card>
