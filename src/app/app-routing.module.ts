@@ -12,6 +12,7 @@ export const routes: Routes = [
   { path: 'suprimento', component: SuprimentoInserirComponent, canActivate : [AuthGuardService] },
   { path: 'usuario', component: UsuarioInserirComponent},
   { path: 'lista', component: SuprimentoListaComponent,canActivate : [AuthGuardService]},
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
 
 ];
 

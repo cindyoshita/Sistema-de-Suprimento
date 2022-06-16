@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Suprimento } from './suprimento.model';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject,map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({providedIn:"root"})
 export class SuprimentoService {
- private suprimento:Suprimento[] = [];
+ private suprimentos:Suprimento[] = [];
  private listaSuprimentosAtualizada = new Subject<Suprimento[]>();
 
  constructor (private httpClient: HttpClient){
@@ -14,7 +14,7 @@ export class SuprimentoService {
 
 
 getSuprimentos(): Suprimento[] {
-  return [...this.suprimento];
+  return [...this.suprimentos];
   }
 
    getListaDeSuprimentosAtualizadaObservable() {
@@ -30,19 +30,47 @@ getSuprimentos(): Suprimento[] {
     this.httpClient.post<{mensagem: string}> ('http://localhost:4000/suprimentos', suprimentos).subscribe(
       (dados) => {
         console.log(dados.mensagem);
-        this.suprimento.push(suprimentos);
-        this.listaSuprimentosAtualizada.next([...this.suprimento])
+        this.suprimentos.push(suprimentos);
+        this.listaSuprimentosAtualizada.next([...this.suprimentos])
         alert('Suprimento inserido com sucesso!')
       }
     )
-    this.suprimento.push(suprimentos);
+    this.suprimentos.push(suprimentos);
   }
 
   getSuprimentosNovo(){
     this.httpClient.get<{mensagem: string}> ('http://localhost:4000/suprimentos')
   }
 
-  // getSuprimentosTeste(): Observable<Suprimento[]>{
-  //   return of(this.getSuprimentosNovo)
-  // }
+
+
+
+  removerSuprimento (id: string): void{
+    this.httpClient.delete(`http://localhost:4000/suprimentos/${id}`).subscribe(() => {
+    console.log (`Suprimento de id: ${id} removido`);
+    });
+    }
+
+
+
+    getSuprimentos1(): void {
+      this.httpClient.get<{mensagem: string,
+        suprimentos: any}>('http://localhost:4000/suprimentos')
+        .pipe(map((dados) => {
+          return dados.suprimentos.map((suprimento => {
+            return {
+              id: suprimento._id,
+              nome: suprimento.nome,
+              fone: suprimento.fone,
+              email: suprimento.email
+            }
+          }))
+        }))
+        .subscribe(
+          (dados) => {
+            this.suprimentos = dados.suprimentos;
+            this.listaSuprimentosAtualizada.next([...this.suprimentos]);
+          }
+        )
+    }
 }

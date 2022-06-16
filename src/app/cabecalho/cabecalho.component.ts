@@ -9,7 +9,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./cabecalho.component.css']
 })
 export class CabecalhoComponent implements OnInit {
-  isUserLoggedIn: () => boolean;
+  public estaLogado: boolean = false;
 
 
   constructor(public authService:AuthService,
@@ -17,9 +17,9 @@ export class CabecalhoComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.subscribe(event => {
-      if (event.constructor.name === "NavigationEnd") {
-       this.isUserLoggedIn = this.authService.isUserLoggedIn;
-      }
+      if (this.authService.isUserLoggedIn() == true ){
+       this.estaLogado = true
+      }else(this.estaLogado = false)
     })
   }
 

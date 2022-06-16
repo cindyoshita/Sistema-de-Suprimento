@@ -1,9 +1,12 @@
 <mat-accordion *ngIf="suprimentos.length > 0">
   <mat-expansion-panel *ngFor="let suprimento of suprimentos">
   <mat-expansion-panel-header>Suprimento:{{suprimento.nameSupply}}</mat-expansion-panel-header>
+  <p>Quantidade:{{suprimento.qttSupply}}</p>
+  <hr />
+  <p>Unidade de medida:{{suprimento.typeSupply}}</p>
 <mat-action-row>
-  <!-- <button mat-button color="primary">EDITAR</button>
-  <button mat-button color="warn">REMOVER</button> -->
+  <button mat-button color="primary">EDITAR</button>
+  <button mat-button color="warn" (click)="onDelete(suprimento.id)">REMOVER</button>
 </mat-action-row>
 </mat-expansion-panel>
   </mat-accordion>

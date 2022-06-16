@@ -1,8 +1,17 @@
-<mat-toolbar color="primary"><nav >
+<mat-toolbar color="primary" *ngIf="estaLogado"><nav >
   <a class="button" routerLink="/login">Fazer Login</a> |
   <a class="button" routerLink="/suprimento">Inserir Novo Suprimento</a> |
   <a class="button"  routerLink="/lista" routerLinkActive="active">Lista de Suprimentos</a> |
   <a class="button" routerLink="/login" (click)="logout()">Sair da Conta</a>
+</nav>
+</mat-toolbar>
+
+
+
+
+<mat-toolbar color="primary"*ngIf="!estaLogado"><nav >
+  <a class="button" routerLink="/login">Fazer Login</a>
+
 </nav>
 </mat-toolbar>
 
