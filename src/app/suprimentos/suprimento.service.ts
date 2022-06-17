@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Suprimento } from './suprimento.model';
 import { Observable, of, Subject,map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 
 @Injectable({providedIn:"root"})
 export class SuprimentoService {
  private suprimentos:Suprimento[] = [];
  private listaSuprimentosAtualizada = new Subject<Suprimento[]>();
 
- constructor (private httpClient: HttpClient){
+ constructor (private httpClient: HttpClient,private router: Router){
 }
 
 
@@ -44,7 +44,9 @@ getSuprimento (idSuprimento: string){
 
   removerSuprimento (id: string): void{
     this.httpClient.delete(`http://localhost:4000/suprimentos/${id}`).subscribe(() => {
-    console.log (`Suprimento de id: ${id} removido`);
+    console.log (`Suprimento de id: ${id} removido`)
+    alert('Suprimento removido com sucesso!');
+    this.router.navigate(['/suprimento']);
     });
     }
 
@@ -81,6 +83,8 @@ getSuprimento (idSuprimento: string){
         copia[indice] = suprimento;
         this.suprimentos = copia;
         this.listaSuprimentosAtualizada.next([...this.suprimentos]);
+        alert('Suprimento alterado com sucesso!')
+        this.router.navigate(['/lista']);
         }));
 
 }
