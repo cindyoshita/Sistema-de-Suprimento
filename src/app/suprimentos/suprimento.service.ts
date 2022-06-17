@@ -84,6 +84,7 @@ getSuprimento (idSuprimento: string){
         this.suprimentos = copia;
         this.listaSuprimentosAtualizada.next([...this.suprimentos]);
         alert('Suprimento alterado com sucesso!')
+        this.router.navigate(['/lista']);
         }));
 
 }
