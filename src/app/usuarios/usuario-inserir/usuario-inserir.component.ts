@@ -9,6 +9,7 @@ styleUrls: ['./usuario-inserir.component.css'],
 
 })
 export class UsuarioInserirComponent {
+  hide = true;
   constructor(public usuarioService: UsuarioService) {}
 
 onAdicionarUsuario(form:NgForm) {
@@ -17,9 +18,9 @@ onAdicionarUsuario(form:NgForm) {
   if (form.invalid){
     return;
   }
-  this.usuarioService.adicionarUsuario(
-    form.value.usuario,
-    form.value.senha,
+  this.usuarioService.addUsuario(
+    form.value.userName,
+    form.value.password,
     );
     form.resetForm();
 

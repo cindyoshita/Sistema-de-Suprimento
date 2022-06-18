@@ -1,0 +1,23 @@
+<h2> Login de Usuários</h2>
+<mat-card>
+<form (submit)="onLogarUsuario(usuarioForm)" #usuarioForm="ngForm" >
+<mat-form-field appearance="outline">
+  <mat-label>Usuário</mat-label>
+<input type="text" required minlength="4" matInput placeholder="Usuário" name="userName" ngModel #userName="ngModel"/>
+<mat-error r *ngIf="userName.invalid">Digite um usuário válido</mat-error>
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>Senha</mat-label>
+  <input matInput [type]="hide ? 'password' : 'text'"required minlength = "8" matInput placeholder="Senha"  name="password" ngModel #password="ngModel">
+  <mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </mat-icon-button>
+  <mat-error *ngIf="password.invalid">Digite uma senha válida</mat-error>
+</mat-form-field>
+<button type="submit" color="primary" mat-raised-button>Entrar na Conta</button>
+<br>
+<br>
+<button color="primary" routerLink="/usuario" mat-raised-button>Inserir Novo Usuário</button>
+</form>
+</mat-card>
+

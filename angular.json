@@ -104,5 +104,7 @@
       }
     }
   },
-  "defaultProject": "projeto-semestra"
+  "cli": {
+    "analytics": false
+  }
 }

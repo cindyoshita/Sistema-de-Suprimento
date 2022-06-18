@@ -1,1 +1,17 @@
-<mat-toolbar color="primary">Inserção</mat-toolbar>
+<mat-toolbar color="primary" *ngIf="estaLogado"><nav >
+  <a class="button" routerLink="/suprimento">Inserir Novo Suprimento</a> |
+  <a class="button"  routerLink="/lista" routerLinkActive="active">Lista de Suprimentos</a> |
+  <a class="button" routerLink="/login" (click)="logout()">Sair da Conta</a>
+</nav>
+</mat-toolbar>
+
+
+
+
+<mat-toolbar color="primary"*ngIf="!estaLogado"><nav >
+
+</nav>
+</mat-toolbar>
+
+
+<router-outlet></router-outlet>

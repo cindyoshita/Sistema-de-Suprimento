@@ -11,29 +11,26 @@ import { Subscription, Observable } from 'rxjs';
 })
 export class SuprimentoListaComponent implements OnInit, OnDestroy {
 
-  /* usuarios = [
-    {
-      usuario:'aaaa',
-      senha:'123456',
-    },
-    {
-      usuario:'bbbb',
-      senha:'abcdef',
-    }
-  ] */
-  suprimentos:Suprimento[]=[];
+
+  suprimentos: Suprimento[] = [];
   private suprimentosSubscription: Subscription;
   constructor(public suprimentoService: SuprimentoService) {}
 
 
   ngOnInit(): void {
-    this.suprimentos = this.suprimentoService.getSuprimentos();
-    this.suprimentosSubscription = this.suprimentoService
-    .getListaDeSuprimentosAtualizadaObservable()
-    .subscribe((suprimentos: Suprimento[]) => {
-    this.suprimentos = suprimentos;
+ this.suprimentoService.getSuprimentos();
+ this.suprimentosSubscription = this.suprimentoService
+ .getListaDeSuprimentosAtualizadaObservable()
+ .subscribe((suprimentos: Suprimento[]) => {
+ this.suprimentos = suprimentos;
  });
+
   }
+
+  onDelete (id: string): void{
+    this.suprimentoService.removerSuprimento(id);
+   }
+
 
   ngOnDestroy(): void {
     this.suprimentosSubscription.unsubscribe()

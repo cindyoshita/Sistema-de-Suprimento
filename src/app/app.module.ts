@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http'
@@ -20,12 +20,17 @@ import { UsuarioService } from './usuarios/usuario.service';
 import { SuprimentoInserirComponent } from './suprimentos/suprimentos-inserir/suprimento-inserir.component';
 import { SuprimentoService } from './suprimentos/suprimento.service';
 import { SuprimentoListaComponent } from './suprimentos/suprimentos-lista/suprimento-lista.component';
+import { LoginComponent } from './login/login.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from  '@angular/material/icon';
 
+import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent,UsuarioInserirComponent,CabecalhoComponent,UsuarioListaComponent,SuprimentoInserirComponent,SuprimentoListaComponent,
+    AppComponent,UsuarioInserirComponent,CabecalhoComponent,UsuarioListaComponent,SuprimentoInserirComponent,SuprimentoListaComponent,LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,10 +43,13 @@ import { SuprimentoListaComponent } from './suprimentos/suprimentos-lista/suprim
     MatToolbarModule,
     MatExpansionModule,
     HttpClientModule,
+    MatSelectModule,
+    MatIconModule
+
 
 
   ],
-  providers: [UsuarioService,SuprimentoService],
+  providers: [UsuarioService,SuprimentoService,AuthGuardService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
