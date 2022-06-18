@@ -5,7 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 
 ## Link do video de funcionamento
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/https://youtu.be/bTmxcY71ga4/0.jpg)](https://www.youtube.com/watch?v=https://youtu.be/bTmxcY71ga4)
+[![Link do Video]](https://youtu.be/bTmxcY71ga4)]
 
 ## Development server
 
